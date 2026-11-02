@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fceef3;
+      color: #4a3540;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      min-width: 0;
+      padding: 28px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(127, 56, 87, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input, select, button {
+      width: 100%;
+      min-width: 0;
+      padding: 12px;
+      border-radius: 6px;
+      font: inherit;
+    }
+
+    input, select {
+      border: 1px solid #ddbecb;
+      background: white;
+      color: #4a3540;
+    }
+
+    input:focus-visible, select:focus-visible, button:focus-visible {
+      outline: 3px solid #e8a5c0;
+      outline-offset: 2px;
+    }
+
+    [aria-invalid="true"] {
+      border-color: #b42318;
+    }
+
+    button {
+      border: none;
+      background: #b33f71;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #96335e;
+    }
+
+    .error {
+      margin: 16px 0 0;
+      padding: 10px;
+      border: 1px solid #efb9b4;
+      border-radius: 6px;
+      color: #a51d16;
+      background: #fff1f0;
+      font-size: 14px;
+    }
+
+    .results {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 6px;
+      background: #fff1f6;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    dl {
+      margin: 0;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    dd {
+      margin: 0;
+      min-width: 0;
+      max-width: 55%;
+      text-align: right;
+      overflow-wrap: anywhere;
+      font-weight: bold;
+    }
+
+    .per-person {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #ebcfdb;
+    }
+  </style>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="card">
+    <h1>Tip Calculator</h1>
+
+    <form id="tip-form" novalidate>
+      <div class="field">
+        <label for="bill">Bill Amount</label>
+        <input id="bill" name="bill" type="text" inputmode="decimal" placeholder="e.g. 80.00" aria-describedby="error" required>
+      </div>
+
+      <div class="field">
+        <label for="tip">Tip Percentage</label>
+        <select id="tip" name="tip">
+          <option value="0.10">10%</option>
+          <option value="0.15" selected>15%</option>
+          <option value="0.20">20%</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="people">Number of People</label>
+        <input id="people" name="people" type="text" inputmode="numeric" value="1" aria-describedby="error" required>
+      </div>
+
+      <button type="submit">Calculate</button>
+      <p id="error" class="error" role="alert" lang="zh-CN" hidden></p>
+    </form>
+
+    <section class="results" aria-labelledby="results-title" aria-live="polite" aria-atomic="true">
+      <h2 id="results-title">Results</h2>
+      <dl>
+        <div class="result-row">
+          <dt>Tip Amount</dt>
+          <dd id="tip-amount">—</dd>
+        </div>
+        <div class="result-row">
+          <dt>Total Amount</dt>
+          <dd id="total-amount">—</dd>
+        </div>
+        <div class="result-row per-person">
+          <dt>Total per Person</dt>
+          <dd id="per-person">—</dd>
+        </div>
+      </dl>
+    </section>
+  </main>
+</body>
+</html>
